@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "component-manifest-lint"
+version = "0.1.0"
+description = "Offline checks for telecom Component manifests (ODA Canvas Component resource): unknown fields, required fields, types, service consistency."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Jihed Ben Arfa" }]
+dependencies = ["pyyaml>=6"]
+
+[project.scripts]
+component-manifest-lint = "component_manifest_lint.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+component_manifest_lint = ["schema.json"]

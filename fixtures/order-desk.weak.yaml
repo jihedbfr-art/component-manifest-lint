@@ -1,0 +1,34 @@
+# Invented example with one defect per rule, for tests.
+apiVersion: oda.tmforum.org/v1
+kind: Component
+metadata:
+  name: demo-orderdesk
+  labels:
+    oda.tmforum.org/componentName: other-name
+spec:
+  componentMetadata:
+    name: orderdesk
+    version: "1.0"
+  coreFunction:
+    exposedApis:
+      - name: typo
+    exposedAPIs:
+      - name: orders
+        specification:
+          - url: https://example.com/main/orders.json
+        implementation: missing-service
+        path: /somewhere/else
+        port: 9090
+      - name: orders
+        implementation: demo-orderdesk-api
+        port: 9090
+      - implementation: demo-orderdesk-api
+    dependentAPIs: not-a-list
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-orderdesk-api
+spec:
+  ports:
+    - port: 8080

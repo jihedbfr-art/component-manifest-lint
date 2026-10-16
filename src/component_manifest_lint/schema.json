@@ -1,0 +1,3208 @@
+{
+ "group": "oda.tmforum.org",
+ "kind": "Component",
+ "source": "https://github.com/tmforum-oda/oda-canvas/blob/c39da6340dbc/charts/oda-crds/templates/oda-component-crd.yaml (Apache-2.0)",
+ "versions": {
+  "v1": {
+   "props": {
+    "spec": {
+     "props": {
+      "componentMetadata": {
+       "props": {
+        "SID": {
+         "items": {
+          "type": "string"
+         },
+         "type": "array"
+        },
+        "description": {
+         "type": "string"
+        },
+        "eTom": {
+         "items": {
+          "type": "string"
+         },
+         "type": "array"
+        },
+        "functionalBlock": {
+         "type": "string"
+        },
+        "functionalFramework": {
+         "items": {
+          "type": "string"
+         },
+         "type": "array"
+        },
+        "id": {
+         "type": "string"
+        },
+        "maintainers": {
+         "items": {
+          "props": {
+           "email": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "url": {
+            "type": "string"
+           }
+          },
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "name": {
+         "type": "string"
+        },
+        "owners": {
+         "items": {
+          "props": {
+           "email": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "url": {
+            "type": "string"
+           }
+          },
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "publicationDate": {
+         "type": "string"
+        },
+        "status": {
+         "type": "string"
+        },
+        "version": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      },
+      "coreFunction": {
+       "props": {
+        "dependentAPIs": {
+         "items": {
+          "props": {
+           "apiSDO": {
+            "type": "string"
+           },
+           "apiType": {
+            "type": "string"
+           },
+           "id": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "items": {
+             "props": {
+              "apiSDO": {
+               "type": "string"
+              },
+              "apiType": {
+               "type": "string"
+              },
+              "resources": {
+               "items": {
+                "open": true,
+                "type": "object"
+               },
+               "type": "array"
+              },
+              "url": {
+               "type": "string"
+              },
+              "version": {
+               "type": "string"
+              }
+             },
+             "type": "object"
+            },
+            "type": "array"
+           }
+          },
+          "required": [
+           "name",
+           "specification"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "exposedAPIs": {
+         "items": {
+          "props": {
+           "apiSDO": {
+            "type": "string"
+           },
+           "apiType": {
+            "type": "string"
+           },
+           "developerUI": {
+            "type": "string"
+           },
+           "gatewayConfiguration": {
+            "props": {
+             "CORS": {
+              "props": {
+               "allowCredentials": {
+                "type": "boolean"
+               },
+               "allowOrigins": {
+                "type": "string"
+               },
+               "enabled": {
+                "type": "boolean"
+               },
+               "handlePreflightRequests": {
+                "props": {
+                 "allowHeaders": {
+                  "type": "string"
+                 },
+                 "allowMethods": {
+                  "type": "string"
+                 },
+                 "enabled": {
+                  "type": "boolean"
+                 },
+                 "maxAge": {
+                  "type": "integer"
+                 }
+                },
+                "type": "object"
+               }
+              },
+              "type": "object"
+             },
+             "OASValidation": {
+              "props": {
+               "allowUnspecifiedCookies": {
+                "type": "boolean"
+               },
+               "allowUnspecifiedHeaders": {
+                "type": "boolean"
+               },
+               "allowUnspecifiedQueryParams": {
+                "type": "boolean"
+               },
+               "requestEnabled": {
+                "type": "boolean"
+               },
+               "responseEnabled": {
+                "type": "boolean"
+               }
+              },
+              "type": "object"
+             },
+             "apiKeyVerification": {
+              "props": {
+               "enabled": {
+                "type": "boolean"
+               },
+               "location": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "quota": {
+              "props": {
+               "identifier": {
+                "type": "string"
+               },
+               "limit": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "rateLimit": {
+              "props": {
+               "enabled": {
+                "type": "boolean"
+               },
+               "identifier": {
+                "type": "string"
+               },
+               "interval": {
+                "type": "string"
+               },
+               "limit": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "template": {
+              "type": "string"
+             }
+            },
+            "type": "object"
+           },
+           "id": {
+            "type": "string"
+           },
+           "implementation": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "path": {
+            "type": "string"
+           },
+           "port": {
+            "type": "integer"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "items": {
+             "props": {
+              "apiSDO": {
+               "type": "string"
+              },
+              "apiType": {
+               "type": "string"
+              },
+              "developerUI": {
+               "type": "string"
+              },
+              "gatewayConfiguration": {
+               "props": {
+                "CORS": {
+                 "props": {
+                  "allowCredentials": {
+                   "type": "boolean"
+                  },
+                  "allowOrigins": {
+                   "type": "string"
+                  },
+                  "enabled": {
+                   "type": "boolean"
+                  },
+                  "handlePreflightRequests": {
+                   "props": {
+                    "allowHeaders": {
+                     "type": "string"
+                    },
+                    "allowMethods": {
+                     "type": "string"
+                    },
+                    "enabled": {
+                     "type": "boolean"
+                    },
+                    "maxAge": {
+                     "type": "integer"
+                    }
+                   },
+                   "type": "object"
+                  }
+                 },
+                 "type": "object"
+                },
+                "OASValidation": {
+                 "props": {
+                  "allowUnspecifiedCookies": {
+                   "type": "boolean"
+                  },
+                  "allowUnspecifiedHeaders": {
+                   "type": "boolean"
+                  },
+                  "allowUnspecifiedQueryParams": {
+                   "type": "boolean"
+                  },
+                  "requestEnabled": {
+                   "type": "boolean"
+                  },
+                  "responseEnabled": {
+                   "type": "boolean"
+                  }
+                 },
+                 "type": "object"
+                },
+                "apiKeyVerification": {
+                 "props": {
+                  "enabled": {
+                   "type": "boolean"
+                  },
+                  "location": {
+                   "type": "string"
+                  }
+                 },
+                 "type": "object"
+                },
+                "quota": {
+                 "props": {
+                  "identifier": {
+                   "type": "string"
+                  },
+                  "limit": {
+                   "type": "string"
+                  }
+                 },
+                 "type": "object"
+                },
+                "rateLimit": {
+                 "props": {
+                  "enabled": {
+                   "type": "boolean"
+                  },
+                  "identifier": {
+                   "type": "string"
+                  },
+                  "interval": {
+                   "type": "string"
+                  },
+                  "limit": {
+                   "type": "string"
+                  }
+                 },
+                 "type": "object"
+                },
+                "template": {
+                 "type": "string"
+                }
+               },
+               "type": "object"
+              },
+              "implementation": {
+               "type": "string"
+              },
+              "path": {
+               "type": "string"
+              },
+              "port": {
+               "type": "integer"
+              },
+              "resources": {
+               "items": {
+                "open": true,
+                "type": "object"
+               },
+               "type": "array"
+              },
+              "url": {
+               "type": "string"
+              },
+              "version": {
+               "type": "string"
+              }
+             },
+             "type": "object"
+            },
+            "type": "array"
+           }
+          },
+          "required": [
+           "name",
+           "specification"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        }
+       },
+       "type": "object"
+      },
+      "eventNotification": {
+       "props": {
+        "publishedEvents": {
+         "items": {
+          "props": {
+           "description": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "specification": {
+            "items": {
+             "props": {
+              "apiType": {
+               "type": "string"
+              },
+              "developerUI": {
+               "type": "string"
+              },
+              "hub": {
+               "type": "string"
+              },
+              "implementation": {
+               "type": "string"
+              },
+              "port": {
+               "type": "integer"
+              },
+              "url": {
+               "type": "string"
+              },
+              "version": {
+               "type": "string"
+              }
+             },
+             "type": "object"
+            },
+            "type": "array"
+           }
+          },
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "subscribedEvents": {
+         "items": {
+          "props": {
+           "description": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "specification": {
+            "items": {
+             "props": {
+              "apiType": {
+               "type": "string"
+              },
+              "callback": {
+               "type": "string"
+              },
+              "developerUI": {
+               "type": "string"
+              },
+              "implementation": {
+               "type": "string"
+              },
+              "port": {
+               "type": "integer"
+              },
+              "query": {
+               "type": "string"
+              },
+              "url": {
+               "type": "string"
+              },
+              "version": {
+               "type": "string"
+              }
+             },
+             "type": "object"
+            },
+            "type": "array"
+           }
+          },
+          "type": "object"
+         },
+         "type": "array"
+        }
+       },
+       "type": "object"
+      },
+      "managementFunction": {
+       "props": {
+        "dependentAPIs": {
+         "items": {
+          "props": {
+           "apiSDO": {
+            "type": "string"
+           },
+           "apiType": {
+            "type": "string"
+           },
+           "id": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "items": {
+             "props": {
+              "apiSDO": {
+               "type": "string"
+              },
+              "apiType": {
+               "type": "string"
+              },
+              "resources": {
+               "items": {
+                "open": true,
+                "type": "object"
+               },
+               "type": "array"
+              },
+              "url": {
+               "type": "string"
+              },
+              "version": {
+               "type": "string"
+              }
+             },
+             "type": "object"
+            },
+            "type": "array"
+           }
+          },
+          "required": [
+           "name"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "exposedAPIs": {
+         "items": {
+          "props": {
+           "apiSDO": {
+            "type": "string"
+           },
+           "apiType": {
+            "type": "string"
+           },
+           "developerUI": {
+            "type": "string"
+           },
+           "gatewayConfiguration": {
+            "props": {
+             "CORS": {
+              "props": {
+               "allowCredentials": {
+                "type": "boolean"
+               },
+               "allowOrigins": {
+                "type": "string"
+               },
+               "enabled": {
+                "type": "boolean"
+               },
+               "handlePreflightRequests": {
+                "props": {
+                 "allowHeaders": {
+                  "type": "string"
+                 },
+                 "allowMethods": {
+                  "type": "string"
+                 },
+                 "enabled": {
+                  "type": "boolean"
+                 },
+                 "maxAge": {
+                  "type": "integer"
+                 }
+                },
+                "type": "object"
+               }
+              },
+              "type": "object"
+             },
+             "OASValidation": {
+              "props": {
+               "allowUnspecifiedCookies": {
+                "type": "boolean"
+               },
+               "allowUnspecifiedHeaders": {
+                "type": "boolean"
+               },
+               "allowUnspecifiedQueryParams": {
+                "type": "boolean"
+               },
+               "requestEnabled": {
+                "type": "boolean"
+               },
+               "responseEnabled": {
+                "type": "boolean"
+               }
+              },
+              "type": "object"
+             },
+             "apiKeyVerification": {
+              "props": {
+               "enabled": {
+                "type": "boolean"
+               },
+               "location": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "quota": {
+              "props": {
+               "identifier": {
+                "type": "string"
+               },
+               "limit": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "rateLimit": {
+              "props": {
+               "enabled": {
+                "type": "boolean"
+               },
+               "identifier": {
+                "type": "string"
+               },
+               "interval": {
+                "type": "string"
+               },
+               "limit": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "template": {
+              "type": "string"
+             }
+            },
+            "type": "object"
+           },
+           "id": {
+            "type": "string"
+           },
+           "implementation": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "path": {
+            "type": "string"
+           },
+           "port": {
+            "type": "integer"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "items": {
+             "props": {
+              "apiSDO": {
+               "type": "string"
+              },
+              "apiType": {
+               "type": "string"
+              },
+              "developerUI": {
+               "type": "string"
+              },
+              "gatewayConfiguration": {
+               "props": {
+                "CORS": {
+                 "props": {
+                  "allowCredentials": {
+                   "type": "boolean"
+                  },
+                  "allowOrigins": {
+                   "type": "string"
+                  },
+                  "enabled": {
+                   "type": "boolean"
+                  },
+                  "handlePreflightRequests": {
+                   "props": {
+                    "allowHeaders": {
+                     "type": "string"
+                    },
+                    "allowMethods": {
+                     "type": "string"
+                    },
+                    "enabled": {
+                     "type": "boolean"
+                    },
+                    "maxAge": {
+                     "type": "integer"
+                    }
+                   },
+                   "type": "object"
+                  }
+                 },
+                 "type": "object"
+                },
+                "OASValidation": {
+                 "props": {
+                  "allowUnspecifiedCookies": {
+                   "type": "boolean"
+                  },
+                  "allowUnspecifiedHeaders": {
+                   "type": "boolean"
+                  },
+                  "allowUnspecifiedQueryParams": {
+                   "type": "boolean"
+                  },
+                  "requestEnabled": {
+                   "type": "boolean"
+                  },
+                  "responseEnabled": {
+                   "type": "boolean"
+                  }
+                 },
+                 "type": "object"
+                },
+                "apiKeyVerification": {
+                 "props": {
+                  "enabled": {
+                   "type": "boolean"
+                  },
+                  "location": {
+                   "type": "string"
+                  }
+                 },
+                 "type": "object"
+                },
+                "quota": {
+                 "props": {
+                  "identifier": {
+                   "type": "string"
+                  },
+                  "limit": {
+                   "type": "string"
+                  }
+                 },
+                 "type": "object"
+                },
+                "rateLimit": {
+                 "props": {
+                  "enabled": {
+                   "type": "boolean"
+                  },
+                  "identifier": {
+                   "type": "string"
+                  },
+                  "interval": {
+                   "type": "string"
+                  },
+                  "limit": {
+                   "type": "string"
+                  }
+                 },
+                 "type": "object"
+                },
+                "template": {
+                 "type": "string"
+                }
+               },
+               "type": "object"
+              },
+              "implementation": {
+               "type": "string"
+              },
+              "path": {
+               "type": "string"
+              },
+              "port": {
+               "type": "integer"
+              },
+              "resources": {
+               "items": {
+                "open": true,
+                "type": "object"
+               },
+               "type": "array"
+              },
+              "url": {
+               "type": "string"
+              },
+              "version": {
+               "type": "string"
+              }
+             },
+             "type": "object"
+            },
+            "type": "array"
+           }
+          },
+          "required": [
+           "name"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        }
+       },
+       "type": "object"
+      },
+      "securityFunction": {
+       "props": {
+        "canvasSystemRole": {
+         "type": "string"
+        },
+        "componentRole": {
+         "items": {
+          "props": {
+           "description": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           }
+          },
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "dependentAPIs": {
+         "items": {
+          "props": {
+           "apiSDO": {
+            "type": "string"
+           },
+           "apiType": {
+            "type": "string"
+           },
+           "id": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "items": {
+             "props": {
+              "apiSDO": {
+               "type": "string"
+              },
+              "apiType": {
+               "type": "string"
+              },
+              "resources": {
+               "items": {
+                "open": true,
+                "type": "object"
+               },
+               "type": "array"
+              },
+              "url": {
+               "type": "string"
+              },
+              "version": {
+               "type": "string"
+              }
+             },
+             "type": "object"
+            },
+            "type": "array"
+           }
+          },
+          "required": [
+           "name",
+           "specification"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "exposedAPIs": {
+         "items": {
+          "props": {
+           "apiSDO": {
+            "type": "string"
+           },
+           "apiType": {
+            "type": "string"
+           },
+           "developerUI": {
+            "type": "string"
+           },
+           "gatewayConfiguration": {
+            "props": {
+             "CORS": {
+              "props": {
+               "allowCredentials": {
+                "type": "boolean"
+               },
+               "allowOrigins": {
+                "type": "string"
+               },
+               "enabled": {
+                "type": "boolean"
+               },
+               "handlePreflightRequests": {
+                "props": {
+                 "allowHeaders": {
+                  "type": "string"
+                 },
+                 "allowMethods": {
+                  "type": "string"
+                 },
+                 "enabled": {
+                  "type": "boolean"
+                 },
+                 "maxAge": {
+                  "type": "integer"
+                 }
+                },
+                "type": "object"
+               }
+              },
+              "type": "object"
+             },
+             "OASValidation": {
+              "props": {
+               "allowUnspecifiedCookies": {
+                "type": "boolean"
+               },
+               "allowUnspecifiedHeaders": {
+                "type": "boolean"
+               },
+               "allowUnspecifiedQueryParams": {
+                "type": "boolean"
+               },
+               "requestEnabled": {
+                "type": "boolean"
+               },
+               "responseEnabled": {
+                "type": "boolean"
+               }
+              },
+              "type": "object"
+             },
+             "apiKeyVerification": {
+              "props": {
+               "enabled": {
+                "type": "boolean"
+               },
+               "location": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "quota": {
+              "props": {
+               "identifier": {
+                "type": "string"
+               },
+               "limit": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "rateLimit": {
+              "props": {
+               "enabled": {
+                "type": "boolean"
+               },
+               "identifier": {
+                "type": "string"
+               },
+               "interval": {
+                "type": "string"
+               },
+               "limit": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "template": {
+              "type": "string"
+             }
+            },
+            "type": "object"
+           },
+           "id": {
+            "type": "string"
+           },
+           "implementation": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "path": {
+            "type": "string"
+           },
+           "port": {
+            "type": "integer"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "items": {
+             "props": {
+              "apiSDO": {
+               "type": "string"
+              },
+              "apiType": {
+               "type": "string"
+              },
+              "developerUI": {
+               "type": "string"
+              },
+              "gatewayConfiguration": {
+               "props": {
+                "CORS": {
+                 "props": {
+                  "allowCredentials": {
+                   "type": "boolean"
+                  },
+                  "allowOrigins": {
+                   "type": "string"
+                  },
+                  "enabled": {
+                   "type": "boolean"
+                  },
+                  "handlePreflightRequests": {
+                   "props": {
+                    "allowHeaders": {
+                     "type": "string"
+                    },
+                    "allowMethods": {
+                     "type": "string"
+                    },
+                    "enabled": {
+                     "type": "boolean"
+                    },
+                    "maxAge": {
+                     "type": "integer"
+                    }
+                   },
+                   "type": "object"
+                  }
+                 },
+                 "type": "object"
+                },
+                "OASValidation": {
+                 "props": {
+                  "allowUnspecifiedCookies": {
+                   "type": "boolean"
+                  },
+                  "allowUnspecifiedHeaders": {
+                   "type": "boolean"
+                  },
+                  "allowUnspecifiedQueryParams": {
+                   "type": "boolean"
+                  },
+                  "requestEnabled": {
+                   "type": "boolean"
+                  },
+                  "responseEnabled": {
+                   "type": "boolean"
+                  }
+                 },
+                 "type": "object"
+                },
+                "apiKeyVerification": {
+                 "props": {
+                  "enabled": {
+                   "type": "boolean"
+                  },
+                  "location": {
+                   "type": "string"
+                  }
+                 },
+                 "type": "object"
+                },
+                "quota": {
+                 "props": {
+                  "identifier": {
+                   "type": "string"
+                  },
+                  "limit": {
+                   "type": "string"
+                  }
+                 },
+                 "type": "object"
+                },
+                "rateLimit": {
+                 "props": {
+                  "enabled": {
+                   "type": "boolean"
+                  },
+                  "identifier": {
+                   "type": "string"
+                  },
+                  "interval": {
+                   "type": "string"
+                  },
+                  "limit": {
+                   "type": "string"
+                  }
+                 },
+                 "type": "object"
+                },
+                "template": {
+                 "type": "string"
+                }
+               },
+               "type": "object"
+              },
+              "implementation": {
+               "type": "string"
+              },
+              "path": {
+               "type": "string"
+              },
+              "port": {
+               "type": "integer"
+              },
+              "resources": {
+               "items": {
+                "open": true,
+                "type": "object"
+               },
+               "type": "array"
+              },
+              "url": {
+               "type": "string"
+              },
+              "version": {
+               "type": "string"
+              }
+             },
+             "type": "object"
+            },
+            "type": "array"
+           }
+          },
+          "required": [
+           "name",
+           "specification"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "secretsManagement": {
+         "open": true,
+         "props": {
+          "podSelector": {
+           "props": {
+            "name": {
+             "type": "string"
+            },
+            "namespace": {
+             "type": "string"
+            },
+            "serviceaccount": {
+             "type": "string"
+            }
+           },
+           "type": "object"
+          },
+          "sideCar": {
+           "props": {
+            "port": {
+             "type": "integer"
+            }
+           },
+           "required": [
+            "port"
+           ],
+           "type": "object"
+          },
+          "type": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "podSelector",
+          "type"
+         ],
+         "type": "object"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "type": "object"
+    }
+   },
+   "type": "object"
+  },
+  "v1beta2": {
+   "props": {
+    "spec": {
+     "props": {
+      "coreFunction": {
+       "props": {
+        "dependentAPIs": {
+         "items": {
+          "props": {
+           "apitype": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "type": "string"
+           }
+          },
+          "required": [
+           "apitype",
+           "name"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "exposedAPIs": {
+         "items": {
+          "props": {
+           "apitype": {
+            "type": "string"
+           },
+           "developerUI": {
+            "type": "string"
+           },
+           "implementation": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "path": {
+            "type": "string"
+           },
+           "port": {
+            "type": "integer"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "type": "string"
+           }
+          },
+          "required": [
+           "apitype",
+           "implementation",
+           "name",
+           "path",
+           "port"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        }
+       },
+       "type": "object"
+      },
+      "description": {
+       "type": "string"
+      },
+      "eventNotification": {
+       "props": {
+        "publishedEvents": {
+         "items": {
+          "props": {
+           "href": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           }
+          },
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "subscribedEvents": {
+         "items": {
+          "props": {
+           "href": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           }
+          },
+          "type": "object"
+         },
+         "type": "array"
+        }
+       },
+       "type": "object"
+      },
+      "functionalBlock": {
+       "type": "string"
+      },
+      "id": {
+       "type": "string"
+      },
+      "maintainers": {
+       "items": {
+        "props": {
+         "email": {
+          "type": "string"
+         },
+         "name": {
+          "type": "string"
+         },
+         "url": {
+          "type": "string"
+         }
+        },
+        "type": "object"
+       },
+       "type": "array"
+      },
+      "managementFunction": {
+       "props": {
+        "dependentAPIs": {
+         "items": {
+          "props": {
+           "apitype": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "type": "string"
+           }
+          },
+          "required": [
+           "apitype",
+           "name"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "exposedAPIs": {
+         "items": {
+          "props": {
+           "apitype": {
+            "type": "string"
+           },
+           "developerUI": {
+            "type": "string"
+           },
+           "implementation": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "path": {
+            "type": "string"
+           },
+           "port": {
+            "type": "integer"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "type": "string"
+           }
+          },
+          "required": [
+           "apitype",
+           "implementation",
+           "name",
+           "path",
+           "port"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        }
+       },
+       "type": "object"
+      },
+      "name": {
+       "type": "string"
+      },
+      "owners": {
+       "items": {
+        "props": {
+         "email": {
+          "type": "string"
+         },
+         "name": {
+          "type": "string"
+         },
+         "url": {
+          "type": "string"
+         }
+        },
+        "type": "object"
+       },
+       "type": "array"
+      },
+      "publicationDate": {
+       "type": "string"
+      },
+      "securityFunction": {
+       "open": true,
+       "props": {
+        "controllerRole": {
+         "type": "string"
+        },
+        "dependentAPIs": {
+         "items": {
+          "props": {
+           "apitype": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "type": "string"
+           }
+          },
+          "required": [
+           "apitype",
+           "name"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "exposedAPIs": {
+         "items": {
+          "props": {
+           "apitype": {
+            "type": "string"
+           },
+           "developerUI": {
+            "type": "string"
+           },
+           "implementation": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "path": {
+            "type": "string"
+           },
+           "port": {
+            "type": "integer"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "type": "string"
+           }
+          },
+          "required": [
+           "apitype",
+           "implementation",
+           "name",
+           "path",
+           "port"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        }
+       },
+       "type": "object"
+      },
+      "status": {
+       "type": "string"
+      },
+      "version": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    }
+   },
+   "type": "object"
+  },
+  "v1beta3": {
+   "props": {
+    "spec": {
+     "props": {
+      "coreFunction": {
+       "props": {
+        "dependentAPIs": {
+         "items": {
+          "props": {
+           "apiType": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "type": "string"
+           }
+          },
+          "required": [
+           "apiType",
+           "name"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "exposedAPIs": {
+         "items": {
+          "props": {
+           "CORS": {
+            "props": {
+             "allowCredentials": {
+              "type": "boolean"
+             },
+             "allowOrigins": {
+              "type": "string"
+             },
+             "enabled": {
+              "type": "boolean"
+             },
+             "handlePreflightRequests": {
+              "props": {
+               "allowHeaders": {
+                "type": "string"
+               },
+               "allowMethods": {
+                "type": "string"
+               },
+               "enabled": {
+                "type": "boolean"
+               },
+               "maxAge": {
+                "type": "integer"
+               }
+              },
+              "type": "object"
+             }
+            },
+            "type": "object"
+           },
+           "OASValidation": {
+            "props": {
+             "allowUnspecifiedCookies": {
+              "type": "boolean"
+             },
+             "allowUnspecifiedHeaders": {
+              "type": "boolean"
+             },
+             "allowUnspecifiedQueryParams": {
+              "type": "boolean"
+             },
+             "requestEnabled": {
+              "type": "boolean"
+             },
+             "responseEnabled": {
+              "type": "boolean"
+             }
+            },
+            "type": "object"
+           },
+           "apiKeyVerification": {
+            "props": {
+             "enabled": {
+              "type": "boolean"
+             },
+             "location": {
+              "type": "string"
+             }
+            },
+            "type": "object"
+           },
+           "apiType": {
+            "type": "string"
+           },
+           "developerUI": {
+            "type": "string"
+           },
+           "implementation": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "path": {
+            "type": "string"
+           },
+           "port": {
+            "type": "integer"
+           },
+           "quota": {
+            "props": {
+             "identifier": {
+              "type": "string"
+             },
+             "limit": {
+              "type": "string"
+             }
+            },
+            "type": "object"
+           },
+           "rateLimit": {
+            "props": {
+             "enabled": {
+              "type": "boolean"
+             },
+             "identifier": {
+              "type": "string"
+             },
+             "interval": {
+              "type": "string"
+             },
+             "limit": {
+              "type": "string"
+             }
+            },
+            "type": "object"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "items": {
+             "type": "string"
+            },
+            "type": "array"
+           },
+           "template": {
+            "type": "string"
+           }
+          },
+          "required": [
+           "apiType",
+           "implementation",
+           "name",
+           "path",
+           "port"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        }
+       },
+       "type": "object"
+      },
+      "description": {
+       "type": "string"
+      },
+      "eventNotification": {
+       "props": {
+        "publishedEvents": {
+         "items": {
+          "props": {
+           "apiType": {
+            "type": "string"
+           },
+           "description": {
+            "type": "string"
+           },
+           "developerUI": {
+            "type": "string"
+           },
+           "hub": {
+            "type": "string"
+           },
+           "implementation": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "port": {
+            "type": "integer"
+           },
+           "specification": {
+            "type": "string"
+           }
+          },
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "subscribedEvents": {
+         "items": {
+          "props": {
+           "apiType": {
+            "type": "string"
+           },
+           "callback": {
+            "type": "string"
+           },
+           "description": {
+            "type": "string"
+           },
+           "developerUI": {
+            "type": "string"
+           },
+           "implementation": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "port": {
+            "type": "integer"
+           },
+           "query": {
+            "type": "string"
+           },
+           "specification": {
+            "type": "string"
+           }
+          },
+          "type": "object"
+         },
+         "type": "array"
+        }
+       },
+       "type": "object"
+      },
+      "functionalBlock": {
+       "type": "string"
+      },
+      "id": {
+       "type": "string"
+      },
+      "maintainers": {
+       "items": {
+        "props": {
+         "email": {
+          "type": "string"
+         },
+         "name": {
+          "type": "string"
+         },
+         "url": {
+          "type": "string"
+         }
+        },
+        "type": "object"
+       },
+       "type": "array"
+      },
+      "managementFunction": {
+       "props": {
+        "dependentAPIs": {
+         "items": {
+          "props": {
+           "apiType": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "type": "string"
+           }
+          },
+          "required": [
+           "apiType",
+           "name"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "exposedAPIs": {
+         "items": {
+          "props": {
+           "CORS": {
+            "props": {
+             "allowCredentials": {
+              "type": "boolean"
+             },
+             "allowOrigins": {
+              "type": "string"
+             },
+             "enabled": {
+              "type": "boolean"
+             },
+             "handlePreflightRequests": {
+              "props": {
+               "allowHeaders": {
+                "type": "string"
+               },
+               "allowMethods": {
+                "type": "string"
+               },
+               "enabled": {
+                "type": "boolean"
+               },
+               "maxAge": {
+                "type": "integer"
+               }
+              },
+              "type": "object"
+             }
+            },
+            "type": "object"
+           },
+           "OASValidation": {
+            "props": {
+             "allowUnspecifiedCookies": {
+              "type": "boolean"
+             },
+             "allowUnspecifiedHeaders": {
+              "type": "boolean"
+             },
+             "allowUnspecifiedQueryParams": {
+              "type": "boolean"
+             },
+             "requestEnabled": {
+              "type": "boolean"
+             },
+             "responseEnabled": {
+              "type": "boolean"
+             }
+            },
+            "type": "object"
+           },
+           "apiKeyVerification": {
+            "props": {
+             "enabled": {
+              "type": "boolean"
+             },
+             "location": {
+              "type": "string"
+             }
+            },
+            "type": "object"
+           },
+           "apiType": {
+            "type": "string"
+           },
+           "developerUI": {
+            "type": "string"
+           },
+           "implementation": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "path": {
+            "type": "string"
+           },
+           "port": {
+            "type": "integer"
+           },
+           "quota": {
+            "props": {
+             "identifier": {
+              "type": "string"
+             },
+             "limit": {
+              "type": "string"
+             }
+            },
+            "type": "object"
+           },
+           "rateLimit": {
+            "props": {
+             "enabled": {
+              "type": "boolean"
+             },
+             "identifier": {
+              "type": "string"
+             },
+             "interval": {
+              "type": "string"
+             },
+             "limit": {
+              "type": "string"
+             }
+            },
+            "type": "object"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "items": {
+             "type": "string"
+            },
+            "type": "array"
+           },
+           "template": {
+            "type": "string"
+           }
+          },
+          "required": [
+           "apiType",
+           "implementation",
+           "name",
+           "path",
+           "port"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        }
+       },
+       "type": "object"
+      },
+      "name": {
+       "type": "string"
+      },
+      "owners": {
+       "items": {
+        "props": {
+         "email": {
+          "type": "string"
+         },
+         "name": {
+          "type": "string"
+         },
+         "url": {
+          "type": "string"
+         }
+        },
+        "type": "object"
+       },
+       "type": "array"
+      },
+      "publicationDate": {
+       "type": "string"
+      },
+      "securityFunction": {
+       "open": true,
+       "props": {
+        "controllerRole": {
+         "type": "string"
+        },
+        "dependentAPIs": {
+         "items": {
+          "props": {
+           "apiType": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "type": "string"
+           }
+          },
+          "required": [
+           "apiType",
+           "name"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "exposedAPIs": {
+         "items": {
+          "props": {
+           "CORS": {
+            "props": {
+             "allowCredentials": {
+              "type": "boolean"
+             },
+             "allowOrigins": {
+              "type": "string"
+             },
+             "enabled": {
+              "type": "boolean"
+             },
+             "handlePreflightRequests": {
+              "props": {
+               "allowHeaders": {
+                "type": "string"
+               },
+               "allowMethods": {
+                "type": "string"
+               },
+               "enabled": {
+                "type": "boolean"
+               },
+               "maxAge": {
+                "type": "integer"
+               }
+              },
+              "type": "object"
+             }
+            },
+            "type": "object"
+           },
+           "OASValidation": {
+            "props": {
+             "allowUnspecifiedCookies": {
+              "type": "boolean"
+             },
+             "allowUnspecifiedHeaders": {
+              "type": "boolean"
+             },
+             "allowUnspecifiedQueryParams": {
+              "type": "boolean"
+             },
+             "requestEnabled": {
+              "type": "boolean"
+             },
+             "responseEnabled": {
+              "type": "boolean"
+             }
+            },
+            "type": "object"
+           },
+           "apiKeyVerification": {
+            "props": {
+             "enabled": {
+              "type": "boolean"
+             },
+             "location": {
+              "type": "string"
+             }
+            },
+            "type": "object"
+           },
+           "apiType": {
+            "type": "string"
+           },
+           "developerUI": {
+            "type": "string"
+           },
+           "implementation": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "path": {
+            "type": "string"
+           },
+           "port": {
+            "type": "integer"
+           },
+           "quota": {
+            "props": {
+             "identifier": {
+              "type": "string"
+             },
+             "limit": {
+              "type": "string"
+             }
+            },
+            "type": "object"
+           },
+           "rateLimit": {
+            "props": {
+             "enabled": {
+              "type": "boolean"
+             },
+             "identifier": {
+              "type": "string"
+             },
+             "interval": {
+              "type": "string"
+             },
+             "limit": {
+              "type": "string"
+             }
+            },
+            "type": "object"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "items": {
+             "type": "string"
+            },
+            "type": "array"
+           },
+           "template": {
+            "type": "string"
+           }
+          },
+          "required": [
+           "apiType",
+           "implementation",
+           "name",
+           "path",
+           "port"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "secretsManagement": {
+         "open": true,
+         "props": {
+          "podSelector": {
+           "props": {
+            "name": {
+             "type": "string"
+            },
+            "namespace": {
+             "type": "string"
+            },
+            "serviceaccount": {
+             "type": "string"
+            }
+           },
+           "type": "object"
+          },
+          "sideCar": {
+           "props": {
+            "port": {
+             "type": "integer"
+            }
+           },
+           "required": [
+            "port"
+           ],
+           "type": "object"
+          },
+          "type": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "podSelector",
+          "type"
+         ],
+         "type": "object"
+        }
+       },
+       "type": "object"
+      },
+      "status": {
+       "type": "string"
+      },
+      "version": {
+       "type": "string"
+      }
+     },
+     "type": "object"
+    }
+   },
+   "type": "object"
+  },
+  "v1beta4": {
+   "props": {
+    "spec": {
+     "props": {
+      "componentMetadata": {
+       "props": {
+        "SID": {
+         "items": {
+          "type": "string"
+         },
+         "type": "array"
+        },
+        "description": {
+         "type": "string"
+        },
+        "eTom": {
+         "items": {
+          "type": "string"
+         },
+         "type": "array"
+        },
+        "functionalBlock": {
+         "type": "string"
+        },
+        "functionalFramework": {
+         "items": {
+          "type": "string"
+         },
+         "type": "array"
+        },
+        "id": {
+         "type": "string"
+        },
+        "maintainers": {
+         "items": {
+          "props": {
+           "email": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "url": {
+            "type": "string"
+           }
+          },
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "name": {
+         "type": "string"
+        },
+        "owners": {
+         "items": {
+          "props": {
+           "email": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "url": {
+            "type": "string"
+           }
+          },
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "publicationDate": {
+         "type": "string"
+        },
+        "status": {
+         "type": "string"
+        },
+        "version": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      },
+      "coreFunction": {
+       "props": {
+        "dependentAPIs": {
+         "items": {
+          "props": {
+           "apiSDO": {
+            "type": "string"
+           },
+           "apiType": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "items": {
+             "props": {
+              "url": {
+               "type": "string"
+              },
+              "version": {
+               "type": "string"
+              }
+             },
+             "type": "object"
+            },
+            "type": "array"
+           }
+          },
+          "required": [
+           "apiType",
+           "name"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "exposedAPIs": {
+         "items": {
+          "props": {
+           "apiSDO": {
+            "type": "string"
+           },
+           "apiType": {
+            "type": "string"
+           },
+           "developerUI": {
+            "type": "string"
+           },
+           "gatewayConfiguration": {
+            "props": {
+             "CORS": {
+              "props": {
+               "allowCredentials": {
+                "type": "boolean"
+               },
+               "allowOrigins": {
+                "type": "string"
+               },
+               "enabled": {
+                "type": "boolean"
+               },
+               "handlePreflightRequests": {
+                "props": {
+                 "allowHeaders": {
+                  "type": "string"
+                 },
+                 "allowMethods": {
+                  "type": "string"
+                 },
+                 "enabled": {
+                  "type": "boolean"
+                 },
+                 "maxAge": {
+                  "type": "integer"
+                 }
+                },
+                "type": "object"
+               }
+              },
+              "type": "object"
+             },
+             "OASValidation": {
+              "props": {
+               "allowUnspecifiedCookies": {
+                "type": "boolean"
+               },
+               "allowUnspecifiedHeaders": {
+                "type": "boolean"
+               },
+               "allowUnspecifiedQueryParams": {
+                "type": "boolean"
+               },
+               "requestEnabled": {
+                "type": "boolean"
+               },
+               "responseEnabled": {
+                "type": "boolean"
+               }
+              },
+              "type": "object"
+             },
+             "apiKeyVerification": {
+              "props": {
+               "enabled": {
+                "type": "boolean"
+               },
+               "location": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "quota": {
+              "props": {
+               "identifier": {
+                "type": "string"
+               },
+               "limit": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "rateLimit": {
+              "props": {
+               "enabled": {
+                "type": "boolean"
+               },
+               "identifier": {
+                "type": "string"
+               },
+               "interval": {
+                "type": "string"
+               },
+               "limit": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "template": {
+              "type": "string"
+             }
+            },
+            "type": "object"
+           },
+           "id": {
+            "type": "string"
+           },
+           "implementation": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "path": {
+            "type": "string"
+           },
+           "port": {
+            "type": "integer"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "items": {
+             "props": {
+              "url": {
+               "type": "string"
+              },
+              "version": {
+               "type": "string"
+              }
+             },
+             "type": "object"
+            },
+            "type": "array"
+           }
+          },
+          "required": [
+           "apiType",
+           "implementation",
+           "name",
+           "path",
+           "port"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        }
+       },
+       "type": "object"
+      },
+      "eventNotification": {
+       "props": {
+        "publishedEvents": {
+         "items": {
+          "props": {
+           "apiType": {
+            "type": "string"
+           },
+           "description": {
+            "type": "string"
+           },
+           "developerUI": {
+            "type": "string"
+           },
+           "hub": {
+            "type": "string"
+           },
+           "implementation": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "port": {
+            "type": "integer"
+           },
+           "specification": {
+            "items": {
+             "props": {
+              "url": {
+               "type": "string"
+              },
+              "version": {
+               "type": "string"
+              }
+             },
+             "type": "object"
+            },
+            "type": "array"
+           }
+          },
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "subscribedEvents": {
+         "items": {
+          "props": {
+           "apiType": {
+            "type": "string"
+           },
+           "callback": {
+            "type": "string"
+           },
+           "description": {
+            "type": "string"
+           },
+           "developerUI": {
+            "type": "string"
+           },
+           "implementation": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "port": {
+            "type": "integer"
+           },
+           "query": {
+            "type": "string"
+           },
+           "specification": {
+            "items": {
+             "props": {
+              "url": {
+               "type": "string"
+              },
+              "version": {
+               "type": "string"
+              }
+             },
+             "type": "object"
+            },
+            "type": "array"
+           }
+          },
+          "type": "object"
+         },
+         "type": "array"
+        }
+       },
+       "type": "object"
+      },
+      "managementFunction": {
+       "props": {
+        "dependentAPIs": {
+         "items": {
+          "props": {
+           "apiSDO": {
+            "type": "string"
+           },
+           "apiType": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "items": {
+             "props": {
+              "url": {
+               "type": "string"
+              },
+              "version": {
+               "type": "string"
+              }
+             },
+             "type": "object"
+            },
+            "type": "array"
+           }
+          },
+          "required": [
+           "apiType",
+           "name"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "exposedAPIs": {
+         "items": {
+          "props": {
+           "apiSDO": {
+            "type": "string"
+           },
+           "apiType": {
+            "type": "string"
+           },
+           "developerUI": {
+            "type": "string"
+           },
+           "gatewayConfiguration": {
+            "props": {
+             "CORS": {
+              "props": {
+               "allowCredentials": {
+                "type": "boolean"
+               },
+               "allowOrigins": {
+                "type": "string"
+               },
+               "enabled": {
+                "type": "boolean"
+               },
+               "handlePreflightRequests": {
+                "props": {
+                 "allowHeaders": {
+                  "type": "string"
+                 },
+                 "allowMethods": {
+                  "type": "string"
+                 },
+                 "enabled": {
+                  "type": "boolean"
+                 },
+                 "maxAge": {
+                  "type": "integer"
+                 }
+                },
+                "type": "object"
+               }
+              },
+              "type": "object"
+             },
+             "OASValidation": {
+              "props": {
+               "allowUnspecifiedCookies": {
+                "type": "boolean"
+               },
+               "allowUnspecifiedHeaders": {
+                "type": "boolean"
+               },
+               "allowUnspecifiedQueryParams": {
+                "type": "boolean"
+               },
+               "requestEnabled": {
+                "type": "boolean"
+               },
+               "responseEnabled": {
+                "type": "boolean"
+               }
+              },
+              "type": "object"
+             },
+             "apiKeyVerification": {
+              "props": {
+               "enabled": {
+                "type": "boolean"
+               },
+               "location": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "quota": {
+              "props": {
+               "identifier": {
+                "type": "string"
+               },
+               "limit": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "rateLimit": {
+              "props": {
+               "enabled": {
+                "type": "boolean"
+               },
+               "identifier": {
+                "type": "string"
+               },
+               "interval": {
+                "type": "string"
+               },
+               "limit": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "template": {
+              "type": "string"
+             }
+            },
+            "type": "object"
+           },
+           "implementation": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "path": {
+            "type": "string"
+           },
+           "port": {
+            "type": "integer"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "items": {
+             "props": {
+              "url": {
+               "type": "string"
+              },
+              "version": {
+               "type": "string"
+              }
+             },
+             "type": "object"
+            },
+            "type": "array"
+           }
+          },
+          "required": [
+           "apiType",
+           "implementation",
+           "name",
+           "path",
+           "port"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        }
+       },
+       "type": "object"
+      },
+      "securityFunction": {
+       "props": {
+        "canvasSystemRole": {
+         "type": "string"
+        },
+        "componentRole": {
+         "items": {
+          "props": {
+           "description": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           }
+          },
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "dependentAPIs": {
+         "items": {
+          "props": {
+           "apiSDO": {
+            "type": "string"
+           },
+           "apiType": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "items": {
+             "props": {
+              "url": {
+               "type": "string"
+              },
+              "version": {
+               "type": "string"
+              }
+             },
+             "type": "object"
+            },
+            "type": "array"
+           }
+          },
+          "required": [
+           "apiType",
+           "name"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "exposedAPIs": {
+         "items": {
+          "props": {
+           "apiSDO": {
+            "type": "string"
+           },
+           "apiType": {
+            "type": "string"
+           },
+           "developerUI": {
+            "type": "string"
+           },
+           "gatewayConfiguration": {
+            "props": {
+             "CORS": {
+              "props": {
+               "allowCredentials": {
+                "type": "boolean"
+               },
+               "allowOrigins": {
+                "type": "string"
+               },
+               "enabled": {
+                "type": "boolean"
+               },
+               "handlePreflightRequests": {
+                "props": {
+                 "allowHeaders": {
+                  "type": "string"
+                 },
+                 "allowMethods": {
+                  "type": "string"
+                 },
+                 "enabled": {
+                  "type": "boolean"
+                 },
+                 "maxAge": {
+                  "type": "integer"
+                 }
+                },
+                "type": "object"
+               }
+              },
+              "type": "object"
+             },
+             "OASValidation": {
+              "props": {
+               "allowUnspecifiedCookies": {
+                "type": "boolean"
+               },
+               "allowUnspecifiedHeaders": {
+                "type": "boolean"
+               },
+               "allowUnspecifiedQueryParams": {
+                "type": "boolean"
+               },
+               "requestEnabled": {
+                "type": "boolean"
+               },
+               "responseEnabled": {
+                "type": "boolean"
+               }
+              },
+              "type": "object"
+             },
+             "apiKeyVerification": {
+              "props": {
+               "enabled": {
+                "type": "boolean"
+               },
+               "location": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "quota": {
+              "props": {
+               "identifier": {
+                "type": "string"
+               },
+               "limit": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "rateLimit": {
+              "props": {
+               "enabled": {
+                "type": "boolean"
+               },
+               "identifier": {
+                "type": "string"
+               },
+               "interval": {
+                "type": "string"
+               },
+               "limit": {
+                "type": "string"
+               }
+              },
+              "type": "object"
+             },
+             "template": {
+              "type": "string"
+             }
+            },
+            "type": "object"
+           },
+           "implementation": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "path": {
+            "type": "string"
+           },
+           "port": {
+            "type": "integer"
+           },
+           "required": {
+            "type": "boolean"
+           },
+           "resources": {
+            "items": {
+             "open": true,
+             "type": "object"
+            },
+            "type": "array"
+           },
+           "specification": {
+            "items": {
+             "props": {
+              "url": {
+               "type": "string"
+              },
+              "version": {
+               "type": "string"
+              }
+             },
+             "type": "object"
+            },
+            "type": "array"
+           }
+          },
+          "required": [
+           "apiType",
+           "implementation",
+           "name",
+           "path",
+           "port"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "secretsManagement": {
+         "open": true,
+         "props": {
+          "podSelector": {
+           "props": {
+            "name": {
+             "type": "string"
+            },
+            "namespace": {
+             "type": "string"
+            },
+            "serviceaccount": {
+             "type": "string"
+            }
+           },
+           "type": "object"
+          },
+          "sideCar": {
+           "props": {
+            "port": {
+             "type": "integer"
+            }
+           },
+           "required": [
+            "port"
+           ],
+           "type": "object"
+          },
+          "type": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "podSelector",
+          "type"
+         ],
+         "type": "object"
+        }
+       },
+       "type": "object"
+      }
+     },
+     "type": "object"
+    }
+   },
+   "type": "object"
+  }
+ }
+}

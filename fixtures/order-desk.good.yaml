@@ -1,0 +1,48 @@
+# Invented example for tests. Not a real component.
+apiVersion: oda.tmforum.org/v1
+kind: Component
+metadata:
+  name: demo-orderdesk
+  labels:
+    oda.tmforum.org/componentName: demo-orderdesk
+spec:
+  componentMetadata:
+    id: DEMO001
+    name: orderdesk
+    version: 1.0.0
+    description: Invented order desk used by the tests.
+    functionalBlock: DemoBlock
+    status: specified
+  coreFunction:
+    exposedAPIs:
+      - name: orders
+        specification:
+          - url: https://example.com/specs/orders-1.0.0.json
+        implementation: demo-orderdesk-api
+        apiType: openapi
+        path: /demo-orderdesk/api/orders/v1
+        port: 8080
+    dependentAPIs:
+      - name: offers
+        apiType: openapi
+        specification:
+          - url: https://example.com/specs/offers-1.0.0.json
+  eventNotification:
+    publishedEvents: []
+    subscribedEvents: []
+  managementFunction:
+    exposedAPIs: []
+    dependentAPIs: []
+  securityFunction:
+    canvasSystemRole: Admin
+    exposedAPIs: []
+    dependentAPIs: []
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-orderdesk-api
+spec:
+  ports:
+    - port: 8080
+      name: http-api
