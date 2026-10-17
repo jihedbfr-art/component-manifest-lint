@@ -12,6 +12,19 @@ class _PlainLoader(yaml.SafeLoader):
     """SafeLoader that keeps dates as text: the published schema types publicationDate as a string."""
 
 
+def _no_duplicate_keys(loader, node, deep=False):
+    seen = set()
+    for key_node, _ in node.value:
+        if key_node.tag == "tag:yaml.org,2002:merge":
+            continue  # '<<' merges are allowed and may be overridden on purpose
+        key = loader.construct_object(key_node, deep=True)
+        if isinstance(key, (str, int, float, bool)) and key in seen:
+            raise yaml.constructor.ConstructorError(None, None, f"duplicate key '{key}'", key_node.start_mark)
+        seen.add(key)
+    return yaml.SafeLoader.construct_mapping(loader, node, deep)
+
+
+_PlainLoader.add_constructor("tag:yaml.org,2002:map", _no_duplicate_keys)
 _PlainLoader.yaml_implicit_resolvers = {
     key: [(tag, rx) for tag, rx in resolvers if tag != "tag:yaml.org,2002:timestamp"]
     for key, resolvers in yaml.SafeLoader.yaml_implicit_resolvers.items()
@@ -19,7 +32,8 @@ _PlainLoader.yaml_implicit_resolvers = {
 
 SCHEMA = json.loads((Path(__file__).with_name("schema.json")).read_text(encoding="utf-8"))
 FUNCTIONS = ("coreFunction", "managementFunction", "securityFunction")
-PINNED_AWAY = re.compile(r"/(master|main|HEAD)/")
+PINNED_AWAY = re.compile(
+    r"^https?://(raw\.githubusercontent\.com/[^/]+/[^/]+|github\.com/[^/]+/[^/]+/(?:blob|raw))/(master|main|HEAD)/")
 SEMVER = re.compile(r"^\d+\.\d+\.\d+([-+][0-9A-Za-z.-]+)?$")
 ERROR, WARN, INFO = "error", "warn", "info"
 
@@ -74,26 +88,30 @@ def _type_name(value):
 def _walk(value, schema, path, version, out):
     """Compare a value against the schema tree: wrong types, unknown fields, missing required fields."""
     expected = schema.get("type")
-    if expected and expected in _TYPES and value is not None:
+    if value is None:
+        return  # the cluster prunes nulls, so a null counts as absent (required fields report it)
+    if expected and expected in _TYPES:
         ok = isinstance(value, _TYPES[expected]) and not (expected in ("integer", "number") and isinstance(value, bool))
         if not ok:
             out.append(_f("M012", ERROR, path, field=path, expected=expected, found=_type_name(value)))
             return
-    if schema.get("open") or not isinstance(value, (dict, list)):
+    if not isinstance(value, (dict, list)):
         return
     if isinstance(value, dict):
         props = schema.get("props")
         if props is None:
             return
         for key in value:
-            if not path and key in ("apiVersion", "kind", "metadata"):  # standard envelope, not in the CRD's own schema
+            if not path and key in ("apiVersion", "kind", "metadata", "status"):  # envelope and cluster-written state
                 continue
             if key not in props:
+                if schema.get("open"):
+                    continue  # free-form node: extra fields are kept by the cluster
                 out.append(_f("M001", WARN, f"{path}.{key}" if path else key, field=f"{path}.{key}" if path else key, version=version))
             else:
                 _walk(value[key], props[key], f"{path}.{key}" if path else key, version, out)
         for key in schema.get("required", []):
-            if key not in value:
+            if value.get(key) is None:
                 out.append(_f("M006", ERROR, path or "(root)", field=f"{path}.{key}" if path else key))
     elif isinstance(value, list) and "items" in schema:
         for index, item in enumerate(value):
@@ -101,12 +119,23 @@ def _walk(value, schema, path, version, out):
 
 
 def _services(docs):
+    """{name: [(namespace, ports, type)]}; malformed Services are skipped, they are not what is being checked."""
     found = {}
     for doc in docs:
-        if isinstance(doc, dict) and doc.get("kind") == "Service":
-            ports = [p.get("port") for p in (doc.get("spec") or {}).get("ports") or [] if isinstance(p, dict)]
-            found[(doc.get("metadata") or {}).get("name")] = ports
+        if not (isinstance(doc, dict) and doc.get("kind") == "Service"):
+            continue
+        meta = doc.get("metadata") if isinstance(doc.get("metadata"), dict) else {}
+        spec = doc.get("spec") if isinstance(doc.get("spec"), dict) else {}
+        raw = spec.get("ports") if isinstance(spec.get("ports"), list) else []
+        ports = [p.get("port") for p in raw if isinstance(p, dict) and isinstance(p.get("port"), int)]
+        if isinstance(meta.get("name"), str):
+            found.setdefault(meta["name"], []).append((meta.get("namespace"), ports, spec.get("type")))
     return found
+
+
+def _match(services, name, namespace):
+    """Services called `name` that could be in the component's namespace (an unset namespace matches any)."""
+    return [s for s in services.get(name, []) if s[0] is None or namespace is None or s[0] == namespace]
 
 
 def check_component(doc, services):
@@ -139,20 +168,30 @@ def check_component(doc, services):
                 if not isinstance(api, dict):
                     continue
                 where = f"spec.{function}.{kind}[{index}]"
-                if api.get("name") in names:
-                    out.append(_f("M010", WARN, where, value=api["name"], function=function))
-                names.append(api.get("name"))
-                for spec_item in api.get("specification") or []:
+                api_name = api.get("name")
+                if isinstance(api_name, str) and api_name in names:
+                    out.append(_f("M010", WARN, where, value=api_name, function=function))
+                if isinstance(api_name, str):
+                    names.append(api_name)
+                specs = api.get("specification") if isinstance(api.get("specification"), list) else []
+                for spec_item in specs:
                     url = spec_item.get("url") if isinstance(spec_item, dict) else None
-                    if isinstance(url, str) and PINNED_AWAY.search(url):
-                        out.append(_f("M011", INFO, where, value=PINNED_AWAY.search(url).group(1)))
+                    hit = PINNED_AWAY.match(url) if isinstance(url, str) else None
+                    if hit:
+                        out.append(_f("M011", INFO, where, value=hit.group(2)))
                 if kind != "exposedAPIs":
                     continue
                 impl = api.get("implementation")
-                if impl and services and impl not in services:
-                    out.append(_f("M007", WARN, where, value=impl))
-                elif impl in services and api.get("port") is not None and services[impl] and api["port"] not in services[impl]:
-                    out.append(_f("M008", WARN, where, port=api["port"], value=impl, service_ports=", ".join(map(str, services[impl]))))
+                if isinstance(impl, str) and impl and services:
+                    candidates = _match(services, impl, meta.get("namespace"))
+                    if not candidates:
+                        out.append(_f("M007", WARN, where, value=impl))
+                    elif isinstance(api.get("port"), int) and not isinstance(api["port"], bool):
+                        usable = [c for c in candidates if c[2] != "ExternalName"]
+                        ports = sorted({p for c in usable for p in c[1]})
+                        if usable and api["port"] not in ports:
+                            out.append(_f("M008", WARN, where, port=api["port"], value=impl,
+                                          service_ports=", ".join(map(str, ports)) or "none"))
                 path = api.get("path")
                 if isinstance(path, str) and name and not path.startswith(f"/{name}"):
                     out.append(_f("M009", INFO, where, value=path, name=name))
@@ -164,12 +203,13 @@ def lint_text(text):
     if "{{" in text:
         raise ValueError("this looks like a Helm template ('{{'): render it first, for example with 'helm template'")
     try:
-        docs = [d for d in yaml.load_all(text, Loader=_PlainLoader) if d is not None]
+        docs = list(yaml.load_all(text, Loader=_PlainLoader))  # keep empty documents so numbering matches the file
     except yaml.YAMLError as error:
         raise ValueError(f"invalid YAML: {error}") from error
     services = _services(docs)
-    results = []
+    results, count = [], 0
     for index, doc in enumerate(docs):
         if isinstance(doc, dict) and doc.get("kind") == SCHEMA["kind"]:
+            count += 1
             results.extend((index, finding) for finding in check_component(doc, services))
-    return results, sum(1 for d in docs if isinstance(d, dict) and d.get("kind") == SCHEMA["kind"])
+    return results, count

@@ -15,7 +15,7 @@ spec:
     exposedAPIs:
       - name: orders
         specification:
-          - url: https://example.com/main/orders.json
+          - url: https://raw.githubusercontent.com/example/specs/main/orders.json
         implementation: missing-service
         path: /somewhere/else
         port: 9090

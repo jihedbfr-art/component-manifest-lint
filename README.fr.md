@@ -12,7 +12,7 @@ Vérifie un manifeste de composant télécom (la ressource Kubernetes `Component
 
 ## Pourquoi cet outil
 
-Le schéma publié d'un `Component` a peu de champs obligatoires et ne conserve pas les champs inconnus : un `exposedApis` mal écrit n'est donc pas une erreur, il est simplement ignoré par le cluster, et on s'en aperçoit quand le composant n'expose pas ce qu'on avait écrit. L'outil lit le même schéma publié et vous prévient avant le déploiement. Il vérifie aussi ce que le schéma ne peut pas vérifier : que `implementation` désigne un vrai Service et que le port correspond, que les noms d'API sont uniques, que les URL de spécification ne suivent pas une branche mouvante.
+Le schéma publié d'un `Component` a peu de champs obligatoires et ne conserve pas les champs inconnus : un `exposedApis` mal écrit n'est donc pas une erreur, le cluster l'ignorera très probablement, et on s'en aperçoit quand le composant n'expose pas ce qu'on avait écrit. L'outil lit le même schéma publié et vous prévient avant le déploiement. Il vérifie aussi ce que le schéma ne peut pas vérifier : que `implementation` désigne un vrai Service et que le port correspond, que les noms d'API sont uniques, que les URL de spécification ne suivent pas une branche mouvante.
 
 ## Démarrage rapide
 
@@ -25,9 +25,9 @@ pip install pyyaml
 PYTHONPATH=src python -m component_manifest_lint --lang fr fixtures/order-desk.weak.yaml
 ```
 
-Ou `pip install .` puis `component-manifest-lint FICHIER [FICHIER ...]`. Plusieurs documents par fichier sont acceptés ; seuls les documents `kind: Component` sont contrôlés, et les Services du même fichier servent aux recoupements. Un modèle Helm doit d'abord être rendu (`helm template`) : l'outil refuse les fichiers qui contiennent encore `{{`.
+Ou `pip install .` puis `component-manifest-lint FICHIER [FICHIER ...]`. Plusieurs documents par fichier sont acceptés ; seuls les documents `kind: Component` sont contrôlés (dans un fichier à plusieurs composants, les constats portent le numéro du document, `fichier#N`), et les Services du même fichier servent aux recoupements. Une valeur nulle compte comme absente, puisque le cluster élague les nulls. Les clés dupliquées dans un mapping sont refusées. Un modèle Helm doit d'abord être rendu (`helm template`) : l'outil refuse les fichiers qui contiennent encore `{{`.
 
-Options : `--lang en|fr`, `--format text|json|md`, `--fail-on error|warn|never` (défaut `error`). Codes de sortie : `0` quand aucun constat n'atteint le niveau `--fail-on`, `1` sinon, `2` pour un fichier illisible ou invalide.
+Options : `--lang en|fr` (constats et libellés du rapport ; les erreurs de lecture et d'analyse restent en anglais), `--format text|json|md`, `--fail-on error|warn|never` (défaut `error`). Codes de sortie : `0` quand aucun constat n'atteint le niveau `--fail-on`, `1` sinon, `2` pour un fichier illisible ou invalide.
 
 ## Ce qui est contrôlé
 
@@ -61,7 +61,7 @@ Les preuves de chaque règle, et le commit d'où le schéma a été tiré, sont 
 python -m unittest discover -s tests
 ```
 
-18 tests. Les jeux d'essai sont des manifestes inventés dans `fixtures/`.
+33 tests. Les jeux d'essai sont des manifestes inventés dans `fixtures/`.
 
 ## Licence et contact
 

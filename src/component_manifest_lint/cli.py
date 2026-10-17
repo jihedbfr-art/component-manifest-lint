@@ -33,7 +33,7 @@ def main(argv=None):
             return 2
         if count == 0:
             print("warning: " + LABELS[args.lang]["nocomp"].format(path=path), file=sys.stderr)
-        rows.extend((str(path), index, finding) for index, finding in results)
+        rows.extend((f"{path}#{index}" if count > 1 else str(path), index, finding) for index, finding in results)
     bad = {"error": (ERROR,), "warn": (ERROR, WARN), "never": ()}[args.fail_on]
     if any(f.severity in bad for _, _, f in rows):
         status = 1

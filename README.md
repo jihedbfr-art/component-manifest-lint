@@ -12,7 +12,7 @@ Check a telecom component manifest (the Kubernetes `Component` resource of the O
 
 ## Why it exists
 
-The published schema for a `Component` has few required fields and does not keep unknown ones, so a misspelled `exposedApis` is not an error: it is simply ignored by the cluster, and you find out when the component does not expose what you wrote. This tool reads the same published schema and tells you before you deploy. It also checks what the schema cannot: that `implementation` names a real Service and the port matches, that API names are unique, that the specification URLs do not follow a moving branch.
+The published schema for a `Component` has few required fields and does not keep unknown ones, so a misspelled `exposedApis` is not an error: the cluster will most likely just ignore it, and you find out when the component does not expose what you wrote. This tool reads the same published schema and tells you before you deploy. It also checks what the schema cannot: that `implementation` names a real Service and the port matches, that API names are unique, that the specification URLs do not follow a moving branch.
 
 ## Quick start
 
@@ -25,9 +25,9 @@ pip install pyyaml
 PYTHONPATH=src python -m component_manifest_lint fixtures/order-desk.weak.yaml
 ```
 
-Or `pip install .` and run `component-manifest-lint FILE [FILE ...]`. Several documents per file are fine; only `kind: Component` documents are checked, and the Services in the same file are used for the cross-checks. A Helm template must be rendered first (`helm template`): the tool refuses files that still contain `{{`.
+Or `pip install .` and run `component-manifest-lint FILE [FILE ...]`. Several documents per file are fine; only `kind: Component` documents are checked (findings in a multi-component file carry the document number, `file#N`), and the Services in the same file are used for the cross-checks. A null value counts as absent, since the cluster prunes nulls. Duplicate keys in a mapping are refused. A Helm template must be rendered first (`helm template`): the tool refuses files that still contain `{{`.
 
-Options: `--lang en|fr`, `--format text|json|md`, `--fail-on error|warn|never` (default `error`). Exit codes: `0` when no finding reaches the `--fail-on` level, `1` otherwise, `2` for an unreadable or invalid file.
+Options: `--lang en|fr` (findings and report labels; read and parse errors stay in English), `--format text|json|md`, `--fail-on error|warn|never` (default `error`). Exit codes: `0` when no finding reaches the `--fail-on` level, `1` otherwise, `2` for an unreadable or invalid file.
 
 ## What it checks
 
@@ -61,7 +61,7 @@ The evidence behind each rule, and the commit the schema was taken from, is in [
 python -m unittest discover -s tests
 ```
 
-18 tests. Fixtures are invented manifests in `fixtures/`.
+33 tests. Fixtures are invented manifests in `fixtures/`.
 
 ## Licence and contact
 

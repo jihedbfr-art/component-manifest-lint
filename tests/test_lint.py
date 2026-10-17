@@ -57,7 +57,7 @@ class LintTests(unittest.TestCase):
 
     def test_free_form_objects_are_not_checked(self):
         doc = component()
-        doc["spec"]["securityFunction"]["secretsManagement"] = {"type": "sidecar", "podSelector": {"a": "b"}, "extra": {"goes": 1}}
+        doc["spec"]["securityFunction"]["secretsManagement"] = {"type": "sidecar", "podSelector": {}, "extra": {"goes": 1}}
         self.assertEqual(check_component(doc, {}), [])  # the published schema keeps unknown fields here
 
     def test_required_api_fields_are_reported_as_errors(self):
