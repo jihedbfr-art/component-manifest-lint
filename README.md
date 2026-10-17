@@ -63,6 +63,10 @@ python -m unittest discover -s tests
 
 33 tests. Fixtures are invented manifests in `fixtures/`.
 
+## Study path
+
+The ideas behind these checks are explained, with sources and exercises, in the bilingual study path [oda-learning-lab](https://github.com/jihedbfr-art/oda-learning-lab/blob/main/docs/en/05-components-in-practice.md) (Module 5).
+
 ## Licence and contact
 
 Code: [Apache License 2.0](LICENSE). Advanced features can be discussed on request: see [COMMERCIAL.md](COMMERCIAL.md).

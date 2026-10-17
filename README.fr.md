@@ -63,6 +63,10 @@ python -m unittest discover -s tests
 
 33 tests. Les jeux d'essai sont des manifestes inventés dans `fixtures/`.
 
+## Parcours d'étude
+
+Les idées derrière ces contrôles sont expliquées, avec sources et exercices, dans le parcours d'étude bilingue [oda-learning-lab](https://github.com/jihedbfr-art/oda-learning-lab/blob/main/docs/fr/05-les-composants-en-pratique.md) (module 5).
+
 ## Licence et contact
 
 Code : [Apache License 2.0](LICENSE). Des fonctions avancées peuvent être discutées sur demande : voir [COMMERCIAL.fr.md](COMMERCIAL.fr.md).
