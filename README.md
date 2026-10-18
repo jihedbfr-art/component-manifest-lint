@@ -27,7 +27,40 @@ PYTHONPATH=src python -m component_manifest_lint fixtures/order-desk.weak.yaml
 
 Or `pip install .` and run `component-manifest-lint FILE [FILE ...]`. Several documents per file are fine; only `kind: Component` documents are checked (findings in a multi-component file carry the document number, `file#N`), and the Services in the same file are used for the cross-checks. A null value counts as absent, since the cluster prunes nulls. Duplicate keys in a mapping are refused. A Helm template must be rendered first (`helm template`): the tool refuses files that still contain `{{`.
 
-Options: `--lang en|fr` (findings and report labels; read and parse errors stay in English), `--format text|json|md`, `--fail-on error|warn|never` (default `error`). Exit codes: `0` when no finding reaches the `--fail-on` level, `1` otherwise, `2` for an unreadable or invalid file.
+Options: `--lang en|fr` (findings and report labels; read and parse errors stay in English), `--format text|json|md|sarif`, `--fail-on error|warn|never` (default `error`). Exit codes: `0` when no finding reaches the `--fail-on` level, `1` otherwise, `2` for an unreadable or invalid file.
+
+## SARIF output
+
+`--format sarif` writes SARIF 2.1.0 JSON. All twelve rules have English descriptions; result messages follow `--lang`. Levels map from `error`, `warn`, `info` to `error`, `warning`, `note`. Each result contains the file URI and a logical path prefixed with the zero-based YAML document index. No line number is guessed. Files inside the current working directory use relative, percent-encoded URIs; external files use absolute file URIs. Run from the repository root for portable reports.
+
+Copy the following job fragment into your own GitHub Actions workflow after choosing a runner. It installs this checkout and checks an included fixture; replace the fixture path with your manifest. The upload also runs after findings cause exit 1, while the check remains failed. Read or parse errors (exit 2) skip upload and remain failures. This is documentation only; this repository's workflows are unchanged. GitHub upload and alert rendering have not been exercised by this change.
+
+```yaml
+permissions:
+  contents: read
+  security-events: write
+steps:
+  - uses: actions/checkout@v6
+  - run: pip install .
+  - name: Check manifests
+    id: manifest
+    shell: bash
+    run: |
+      set +e
+      component-manifest-lint fixtures/order-desk.weak.yaml --format sarif > results.sarif
+      status=$?
+      echo "status=$status" >> "$GITHUB_OUTPUT"
+      exit "$status"
+  - name: Upload SARIF
+    if: ${{ !cancelled() && (steps.manifest.outputs.status == '0' || steps.manifest.outputs.status == '1') }}
+    uses: github/codeql-action/upload-sarif@v4
+    with:
+      sarif_file: results.sarif
+      category: component-manifest-lint
+```
+
+References (accessed 2026-10-18): [GitHub SARIF upload documentation](https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/integrate-with-existing-tools/upload-sarif-file), [SARIF 2.1.0 schema](https://json.schemastore.org/sarif-2.1.0.json).
+
 
 ## What it checks
 
@@ -61,7 +94,7 @@ The evidence behind each rule, and the commit the schema was taken from, is in [
 python -m unittest discover -s tests
 ```
 
-33 tests. Fixtures are invented manifests in `fixtures/`.
+40 tests. Fixtures are invented manifests in `fixtures/`.
 
 ## Study path
 

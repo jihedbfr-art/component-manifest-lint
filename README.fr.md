@@ -27,7 +27,40 @@ PYTHONPATH=src python -m component_manifest_lint --lang fr fixtures/order-desk.w
 
 Ou `pip install .` puis `component-manifest-lint FICHIER [FICHIER ...]`. Plusieurs documents par fichier sont acceptés ; seuls les documents `kind: Component` sont contrôlés (dans un fichier à plusieurs composants, les constats portent le numéro du document, `fichier#N`), et les Services du même fichier servent aux recoupements. Une valeur nulle compte comme absente, puisque le cluster élague les nulls. Les clés dupliquées dans un mapping sont refusées. Un modèle Helm doit d'abord être rendu (`helm template`) : l'outil refuse les fichiers qui contiennent encore `{{`.
 
-Options : `--lang en|fr` (constats et libellés du rapport ; les erreurs de lecture et d'analyse restent en anglais), `--format text|json|md`, `--fail-on error|warn|never` (défaut `error`). Codes de sortie : `0` quand aucun constat n'atteint le niveau `--fail-on`, `1` sinon, `2` pour un fichier illisible ou invalide.
+Options : `--lang en|fr` (constats et libellés du rapport ; les erreurs de lecture et d'analyse restent en anglais), `--format text|json|md|sarif`, `--fail-on error|warn|never` (défaut `error`). Codes de sortie : `0` quand aucun constat n'atteint le niveau `--fail-on`, `1` sinon, `2` pour un fichier illisible ou invalide.
+
+## Sortie SARIF
+
+`--format sarif` produit du JSON SARIF 2.1.0. Les douze règles ont une description anglaise ; les messages des constats suivent `--lang`. Les niveaux `error`, `warn`, `info` deviennent `error`, `warning`, `note`. Chaque constat contient l'URI du fichier et un chemin logique préfixé par l'indice du document YAML, compté à partir de zéro. Aucun numéro de ligne n'est deviné. Les fichiers sous le répertoire courant utilisent une URI relative encodée ; les fichiers externes utilisent une URI de fichier absolue. Lancez la commande depuis la racine du dépôt pour un rapport portable.
+
+Copiez ce fragment de job dans votre propre workflow GitHub Actions après avoir choisi un runner. Il installe le dépôt extrait et contrôle une fixture fournie ; remplacez son chemin par celui de votre manifeste. Le téléversement s'exécute aussi quand des constats provoquent le code 1, et le contrôle reste en échec. Les erreurs de lecture ou d'analyse (code 2) empêchent le téléversement et restent des échecs. Il s'agit seulement d'un exemple documentaire ; les workflows du dépôt restent inchangés. Cette modification n'a pas été testée par un téléversement réel ni par l'affichage d'alertes dans GitHub.
+
+```yaml
+permissions:
+  contents: read
+  security-events: write
+steps:
+  - uses: actions/checkout@v6
+  - run: pip install .
+  - name: Check manifests
+    id: manifest
+    shell: bash
+    run: |
+      set +e
+      component-manifest-lint fixtures/order-desk.weak.yaml --format sarif > results.sarif
+      status=$?
+      echo "status=$status" >> "$GITHUB_OUTPUT"
+      exit "$status"
+  - name: Upload SARIF
+    if: ${{ !cancelled() && (steps.manifest.outputs.status == '0' || steps.manifest.outputs.status == '1') }}
+    uses: github/codeql-action/upload-sarif@v4
+    with:
+      sarif_file: results.sarif
+      category: component-manifest-lint
+```
+
+Références (consultées le 18 octobre 2026) : [documentation GitHub du téléversement SARIF](https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/integrate-with-existing-tools/upload-sarif-file), [schéma SARIF 2.1.0](https://json.schemastore.org/sarif-2.1.0.json).
+
 
 ## Ce qui est contrôlé
 
@@ -61,7 +94,7 @@ Les preuves de chaque règle, et le commit d'où le schéma a été tiré, sont 
 python -m unittest discover -s tests
 ```
 
-33 tests. Les jeux d'essai sont des manifestes inventés dans `fixtures/`.
+40 tests. Les jeux d'essai sont des manifestes inventés dans `fixtures/`.
 
 ## Parcours d'étude
 
