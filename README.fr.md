@@ -94,7 +94,9 @@ Les preuves de chaque règle, et le commit d'où le schéma a été tiré, sont 
 python -m unittest discover -s tests
 ```
 
-40 tests. Les jeux d'essai sont des manifestes inventés dans `fixtures/`.
+44 tests. Les jeux d'essai sont des manifestes inventés dans `fixtures/`.
+
+Le nombre de mutations, la graine fixe et les entrées minimales de plantage figurent dans les [contrôles par mutations](docs/mutation-testing.fr.md).
 
 ## Parcours d'étude
 

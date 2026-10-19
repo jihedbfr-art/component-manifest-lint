@@ -1,5 +1,6 @@
 """Command line: component-manifest-lint FILE [FILE ...]"""
 import argparse
+from functools import lru_cache
 import json
 import sys
 from pathlib import Path
@@ -13,13 +14,19 @@ LABELS = {
 }
 
 
-def main(argv=None):
+@lru_cache(maxsize=1)
+def _parser():
     parser = argparse.ArgumentParser(prog="component-manifest-lint",
                                      description="Check Component manifests (YAML) against the published schema. Offline.")
     parser.add_argument("files", nargs="+")
     parser.add_argument("--lang", choices=("en", "fr"), default="en")
     parser.add_argument("--format", choices=("text", "json", "md", "sarif"), default="text")
     parser.add_argument("--fail-on", choices=("error", "warn", "never"), default="error")
+    return parser
+
+
+def main(argv=None):
+    parser = _parser()
     args = parser.parse_args(argv)
     rows, sarif_rows, status = [], [], 0
     for name in args.files:
