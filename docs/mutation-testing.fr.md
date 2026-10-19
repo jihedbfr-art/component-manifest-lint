@@ -12,7 +12,7 @@ python -m unittest discover -s tests -p test_mapping_keys.py
 
 Le test utilise seulement la bibliothèque standard et appelle le vrai `cli.main` sur un fichier temporaire. L'application conserve sa dépendance existante à PyYAML. Les deux fixtures YAML fournissent 3 000 entrées avec la graine `20261019` : suppression d'une clé, remplacement d'une valeur par null/nombre/liste/dictionnaire/chaîne, duplication d'un élément de liste, vidage d'un objet ou troncature du texte. Les types et formats alternent indépendamment ; les sorties texte, JSON, Markdown et SARIF ainsi que les deux langues sont exercées. Les entrées malformées sont transmises à la commande, pas écartées.
 
-Chaque appel doit renvoyer 0, 1 ou 2 sans exception non gérée. Le code 2 doit être accompagné d'un message non vide sur stderr. Aucun des deux flux ne doit contenir `Traceback`. Le test affiche le nombre d'opérations, les codes de sortie et la durée, et échoue au-delà de 30 secondes. La graine fixe répète les mêmes mutations pour les mêmes fixtures et le même interpréteur ; elle ne couvre pas toutes les entrées possibles.
+Chaque appel doit renvoyer 0, 1 ou 2 sans exception non gérée. Le code 2 doit être accompagné d'un message non vide sur stderr. Aucun des deux flux ne doit contenir `Traceback`. Le test affiche le nombre d'opérations, les codes de sortie et la durée, et échoue au-delà de 120 secondes (garde-fou contre les blocages). La graine fixe répète les mêmes mutations pour les mêmes fixtures et le même interpréteur ; elle ne couvre pas toutes les entrées possibles.
 
 ## Défaut reproduit avant correction
 

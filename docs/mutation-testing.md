@@ -12,7 +12,7 @@ python -m unittest discover -s tests -p test_mapping_keys.py
 
 The mutation harness uses only the standard library and calls the real `cli.main` against a temporary file. The application still uses its existing PyYAML dependency. The two YAML fixtures supply 3,000 inputs with seed `20261019`: delete a key, replace a value with null/number/list/dictionary/string, duplicate a list item, empty an object, or truncate the text. Types and formats rotate independently; text, JSON, Markdown and SARIF outputs and both message languages are exercised. Malformed inputs are passed to the command, not discarded.
 
-Every call must return 0, 1 or 2 without an uncaught exception. Exit 2 must include a nonempty stderr message. Neither stream may contain `Traceback`. The test prints operation counts, exit counts and elapsed time, and fails above 30 seconds. The fixed seed repeats the same mutations for the same fixture contents and interpreter; it does not exhaust possible inputs.
+Every call must return 0, 1 or 2 without an uncaught exception. Exit 2 must include a nonempty stderr message. Neither stream may contain `Traceback`. The test prints operation counts, exit counts and elapsed time, and fails above 120 seconds (a guard against hangs). The fixed seed repeats the same mutations for the same fixture contents and interpreter; it does not exhaust possible inputs.
 
 ## Defect reproduced before correction
 

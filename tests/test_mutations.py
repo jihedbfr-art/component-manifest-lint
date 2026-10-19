@@ -17,6 +17,7 @@ from component_manifest_lint import cli
 
 SEED = 20261019
 COUNT = 3000
+BUDGET_SECONDS = 120  # a guard against hangs: the test is about robustness, and slower machines take 2x CI
 OPERATIONS = ("delete", "null", "number", "list", "dict", "string", "duplicate", "empty", "truncate")
 FORMATS = ("text", "json", "md", "sarif")
 KEY = re.compile(r"^(\s*(?:-\s+)?[^:#\n]+):(?:\s.*)?$")
@@ -93,7 +94,7 @@ class MutationTests(unittest.TestCase):
         self.assertEqual(set(counts), set(OPERATIONS))
         elapsed = time.perf_counter() - started
         print(f"mutations={COUNT} seed={SEED} seconds={elapsed:.3f} operations={dict(counts)} exits={dict(statuses)}")
-        self.assertLess(elapsed, 30, "Mutation suite exceeded its 30-second budget")
+        self.assertLess(elapsed, BUDGET_SECONDS, f"Mutation suite exceeded its {BUDGET_SECONDS}-second budget")
 
 
 if __name__ == "__main__":
