@@ -94,7 +94,9 @@ The evidence behind each rule, and the commit the schema was taken from, is in [
 python -m unittest discover -s tests
 ```
 
-40 tests. Fixtures are invented manifests in `fixtures/`.
+44 tests. Fixtures are invented manifests in `fixtures/`.
+
+Mutation counts, the fixed seed and minimized crash inputs are documented in [mutation checks](docs/mutation-testing.md).
 
 ## Study path
 

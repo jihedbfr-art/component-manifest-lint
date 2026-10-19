@@ -2,6 +2,12 @@
 
 [Version française](CHANGELOG.fr.md)
 
+## 0.2.1
+
+Fix malformed YAML mapping keys escaping as TypeError: list and dictionary keys now produce a readable parse error and exit 2. Add two subprocess regression tests and a fixed-seed 3,000-input mutation campaign, with the 30-second limit retained. See [mutation checks](docs/mutation-testing.md).
+
+Reuse the CLI parser and per-report file URIs; use the existing accelerated safe YAML loader when available, with the pure Python fallback retained.
+
 ## 0.2.0
 
 Add SARIF 2.1.0 output with English rule descriptions, localized findings, file URIs and logical document paths. Exit codes remain unchanged. Add a copyable GitHub Actions upload example without changing workflows. 40 tests.

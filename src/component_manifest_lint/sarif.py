@@ -32,13 +32,16 @@ def artifact_uri(path):
 
 def report(rows, lang="en"):
     results = []
+    uris = {}
     for path, document, finding in rows:
+        if path not in uris:
+            uris[path] = artifact_uri(path)
         results.append({
             "ruleId": finding.rule,
             "level": LEVELS[finding.severity],
             "message": {"text": finding.message(lang)},
             "locations": [{
-                "physicalLocation": {"artifactLocation": {"uri": artifact_uri(path)}},
+                "physicalLocation": {"artifactLocation": {"uri": uris[path]}},
                 "logicalLocations": [{"fullyQualifiedName": f"document[{document}].{finding.where}"}],
             }],
             "properties": {"document": document, "where": finding.where},

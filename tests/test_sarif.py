@@ -29,7 +29,7 @@ class SarifTests(unittest.TestCase):
         self.assertEqual(err, "")
         self.assertEqual(data["version"], "2.1.0")
         run = data["runs"][0]
-        self.assertEqual(run["tool"]["driver"]["version"], "0.2.0")
+        self.assertEqual(run["tool"]["driver"]["version"], "0.2.1")
         self.assertEqual({r["id"] for r in run["tool"]["driver"]["rules"]}, set(MESSAGES))
         self.assertTrue(all(r["shortDescription"]["text"] for r in run["tool"]["driver"]["rules"]))
         self.assertEqual(len(run["results"]), len(expected))

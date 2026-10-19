@@ -8,7 +8,10 @@ import yaml
 
 
 
-class _PlainLoader(yaml.SafeLoader):
+_SafeLoader = getattr(yaml, "CSafeLoader", yaml.SafeLoader)
+
+
+class _PlainLoader(_SafeLoader):
     """SafeLoader that keeps dates as text: the published schema types publicationDate as a string."""
 
 
@@ -20,14 +23,18 @@ def _no_duplicate_keys(loader, node, deep=False):
         key = loader.construct_object(key_node, deep=True)
         if isinstance(key, (str, int, float, bool)) and key in seen:
             raise yaml.constructor.ConstructorError(None, None, f"duplicate key '{key}'", key_node.start_mark)
-        seen.add(key)
-    return yaml.SafeLoader.construct_mapping(loader, node, deep)
+        try:
+            seen.add(key)
+        except TypeError as error:
+            raise yaml.constructor.ConstructorError(
+                None, None, "mapping key must be hashable", key_node.start_mark) from error
+    return _SafeLoader.construct_mapping(loader, node, deep)
 
 
 _PlainLoader.add_constructor("tag:yaml.org,2002:map", _no_duplicate_keys)
 _PlainLoader.yaml_implicit_resolvers = {
     key: [(tag, rx) for tag, rx in resolvers if tag != "tag:yaml.org,2002:timestamp"]
-    for key, resolvers in yaml.SafeLoader.yaml_implicit_resolvers.items()
+    for key, resolvers in _SafeLoader.yaml_implicit_resolvers.items()
 }
 
 SCHEMA = json.loads((Path(__file__).with_name("schema.json")).read_text(encoding="utf-8"))
