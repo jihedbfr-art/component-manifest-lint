@@ -106,6 +106,10 @@ The ideas behind these checks are explained, with sources and exercises, in the 
 
 Code: [Apache License 2.0](LICENSE). Advanced features can be discussed on request: see [COMMERCIAL.md](COMMERCIAL.md).
 
+## Distribution checks
+
+[Distribution checks](DISTRIBUTION.md) — Build and verify the source archive and wheel, then exercise the installed commands outside the checkout.
+
 ---
 
 <p align="center">
