@@ -106,6 +106,10 @@ Les idées derrière ces contrôles sont expliquées, avec sources et exercices,
 
 Code : [Apache License 2.0](LICENSE). Des fonctions avancées peuvent être discutées sur demande : voir [COMMERCIAL.fr.md](COMMERCIAL.fr.md).
 
+## Contrôles de distribution
+
+[Contrôles de distribution](DISTRIBUTION.fr.md) — Construire et vérifier l’archive source et le wheel, puis exercer les commandes installées hors du checkout.
+
 ---
 
 <p align="center">
